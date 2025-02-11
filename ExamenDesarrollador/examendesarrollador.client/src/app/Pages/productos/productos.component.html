@@ -1,0 +1,38 @@
+
+
+<h3>Información Producto</h3>
+
+<app-divider></app-divider>
+
+<button style="width:5em;" type="button" (click)="save()">Guardar</button>
+
+<div class="row">
+  
+  <div class="col-md-6">
+    <div class="col-md-7 col-lg-8">
+      <label for="name" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="producto.name" placeholder="Nombre Producto" value="" required>
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+      <label for="code" class="form-label">Código</label>
+      <input type="text" class="form-control" id="code" [(ngModel)]="producto.code" placeholder="Código Producto" value="" required>
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+      <label for="price" class="form-label">Precio</label>
+      <input type="number" class="form-control" id="precio" [(ngModel)]="producto.price" placeholder="Precio Producto" value="" required>
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+      <label for="stock" class="form-label">Stock</label>
+      <input type="number" class="form-control" id="stock" [(ngModel)]="producto.stock" placeholder="Stock Producto" value="" required>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <app-image-uploader></app-image-uploader>
+  </div>
+
+
+</div>
