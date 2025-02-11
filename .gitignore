@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/ExamenDesarrollador/.vs
+/ExamenDesarrollador/ExamenDesarrollador.Bussiness/bin/Debug/net8.0
+/ExamenDesarrollador/ExamenDesarrollador.Bussiness/obj
+/ExamenDesarrollador/examendesarrollador.client/.vscode
+/ExamenDesarrollador/examendesarrollador.client/obj/Debug
+/ExamenDesarrollador/ExamenDesarrollador.Data/bin/Debug/net8.0
+/ExamenDesarrollador/ExamenDesarrollador.Data/obj
+/ExamenDesarrollador/ExamenDesarrollador.Entitys/bin/Debug/net8.0
+/ExamenDesarrollador/ExamenDesarrollador.Entitys/obj
+/ExamenDesarrollador/ExamenDesarrollador.Server/bin/Debug/net8.0
+/ExamenDesarrollador/ExamenDesarrollador.Server/obj
