@@ -1,0 +1,36 @@
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+  .search-bar input[type="text"] {
+    width: 250px;
+    padding: 8px;
+    margin-right: 10px;
+  }
+
+  .search-bar button {
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+
+.results {
+  text-align: left;
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+}
+
+  .product-card h3 {
+    margin: 0 0 8px 0;
+  }

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@angular/animations": "^19.1.6",
+    "@tailwindcss/postcss": "^4.0.6",
+    "ngx-toastr": "^17.0.2",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.6"
+  }
+}

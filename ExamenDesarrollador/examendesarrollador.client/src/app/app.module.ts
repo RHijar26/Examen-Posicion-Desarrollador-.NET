@@ -7,27 +7,37 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
 import { provideRouter, RouterModule } from '@angular/router';
-import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
 import { ProductosComponent } from './Pages/productos/productos.component';
 import { HeaderComponent } from './Layout/header/header.component';
 import { ClientesComponent } from './Pages/clientes/clientes.component';
 import { SucursalesComponent } from './Pages/sucursales/sucursales.component';
 import { DividerComponent } from './Components/divider/divider.component';
 import { ImageUploaderComponent } from './Components/image-uploader/image-uploader.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { SearchProductsComponent } from './Components/search-product/search-products.component';
+import { CarritoComponent } from './pages/carrito/carrito.component';
+import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
+
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, CatalogoComponent, ProductosComponent, HeaderComponent, ClientesComponent, SucursalesComponent, DividerComponent, ImageUploaderComponent, 
+    LoginComponent, CatalogoComponent, ProductosComponent, HeaderComponent, ClientesComponent, SucursalesComponent, DividerComponent, ImageUploaderComponent,
+    SearchProductsComponent, CarritoComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
-    AppRoutingModule,    
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'catalogo', component: CatalogoComponent },
       { path: 'Productos', component: ProductosComponent },
       { path: 'Clientes', component: ClientesComponent },
       { path: 'Sucursales', component: SucursalesComponent },
+      { path: 'Carrito', component: CarritoComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'catalogo' }
     ]),    
   ],

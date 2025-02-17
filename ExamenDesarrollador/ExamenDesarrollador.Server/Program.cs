@@ -1,5 +1,6 @@
 using ExamenDesarrollador.Server;
 using ExamenDesarrollador.Server.Handlers;
+using ExamenDesarrollador.Bussiness.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +13,20 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
+builder.Services.AddApplicationLayer();
 
 Services.LoadServices(builder);
+
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseCors("CorsPolicy");
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

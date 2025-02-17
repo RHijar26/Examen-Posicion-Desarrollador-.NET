@@ -26,10 +26,13 @@ namespace ExamenDesarrollador.Data.Context
 
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductShop> ProductShop { get; set; }
-        
-
-
 
         #endregion
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

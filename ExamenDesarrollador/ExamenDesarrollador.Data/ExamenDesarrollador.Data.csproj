@@ -19,10 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorys\Clients\" />
     <Folder Include="Repositorys\Shops\" />
     <Folder Include="Repositorys\Users\" />
-    <Folder Include="Repositorys\Products\" />
   </ItemGroup>
 
   <ItemGroup>

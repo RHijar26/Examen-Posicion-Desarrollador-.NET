@@ -4,35 +4,76 @@
 
 <app-divider></app-divider>
 
-<button style="width:5em;" type="button" (click)="save()">Guardar</button>
 
-<div class="row">
-  
+
+<div class="row border-b border-gray-900/10 pb-12">
+
+  <div class="col-md-6 ">
+    <div class="sm:col-span-4">
+      <label for="name" class="block text-sm/6 font-medium text-gray-900">Producto</label>
+      <div class="mt-2">
+        <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <input type="text" id="name" [(ngModel)]="producto.Name" placeholder="Nombre Producto" value="" required class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+        </div>
+      </div>
+    </div>
+
+    <div class="sm:col-span-4">
+      <label for="code" class="block text-sm/6 font-medium text-gray-900">Código</label>
+      <div class="mt-2">
+        <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <input type="text" id="code" [(ngModel)]="producto.Code" placeholder="Código Producto" value="" required class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+        </div>
+      </div>
+    </div>
+
+    <div class="sm:col-span-4">
+      <label for="price" class="block text-sm/6 font-medium text-gray-900">Precio</label>
+      <div class="mt-2">
+        <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <input type="number" id="price" [(ngModel)]="producto.Price" placeholder="Precio Producto" value="" required class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+        </div>
+      </div>
+    </div>
+
+    <div class="sm:col-span-4">
+      <label for="stock" class="block text-sm/6 font-medium text-gray-900">Stock</label>
+      <div class="mt-2">
+        <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+          <input type="number" id="stock" [(ngModel)]="producto.Stock" placeholder="Stock Producto" value="" required class="block min-w-0 grow py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6">
+        </div>
+      </div>
+    </div>
+
+  </div>
   <div class="col-md-6">
-    <div class="col-md-7 col-lg-8">
-      <label for="name" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="producto.name" placeholder="Nombre Producto" value="" required>
-    </div>
-
-    <div class="col-md-7 col-lg-8">
-      <label for="code" class="form-label">Código</label>
-      <input type="text" class="form-control" id="code" [(ngModel)]="producto.code" placeholder="Código Producto" value="" required>
-    </div>
-
-    <div class="col-md-7 col-lg-8">
-      <label for="price" class="form-label">Precio</label>
-      <input type="number" class="form-control" id="precio" [(ngModel)]="producto.price" placeholder="Precio Producto" value="" required>
-    </div>
-
-    <div class="col-md-7 col-lg-8">
-      <label for="stock" class="form-label">Stock</label>
-      <input type="number" class="form-control" id="stock" [(ngModel)]="producto.stock" placeholder="Stock Producto" value="" required>
-    </div>
+    <app-image-uploader [(image)]="producto.Image"></app-image-uploader>
   </div>
 
-  <div class="col-md-6">
-    <app-image-uploader></app-image-uploader>
-  </div>
+</div>
 
+
+<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="searchModalLabel">Consulta Productos</h1>
+        <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-search-products (productSelected)="onProductSelected($event)"></app-search-products>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-6 flex items-center justify-end gap-x-6">
+  <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="clean()">Limpiar</button>
+
+  <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" data-bs-toggle="modal" data-bs-target="#searchModal">
+    Consultar
+  </button>
+
+  <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="save()">Guardar</button>
 
 </div>

@@ -1,7 +1,8 @@
 export class Producto {
-  id!: number;
-  name!: string;
-  code!: string;
-  price!: number;
-  stock!: number;
+  Id!: number;
+  Name!: string;
+  Code!: string;
+  Price!: number;
+  Stock!: number;
+  Image!: string | ArrayBuffer | null;;
 }

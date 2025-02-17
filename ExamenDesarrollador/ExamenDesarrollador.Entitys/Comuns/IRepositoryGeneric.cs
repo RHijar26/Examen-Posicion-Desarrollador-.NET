@@ -9,11 +9,11 @@ namespace ExamenDesarrollador.Entitys.Comuns
     public interface IRepositoryGeneric<TEntity> where TEntity : class
     {
         Task<TEntity> GetById(int id);
-        Task<object> Insert(TEntity entity);
-        Task<object> Insert(List<TEntity>? entities);
-        Task<object> Update(TEntity entity, int Id);
-        Task<object> Delete(int id);
-        Task<object> Delete(TEntity entity);
+        Task Insert(TEntity entity);
+        Task Insert(List<TEntity>? entities);
+        Task Update(TEntity entity, int Id);
+        Task Delete(int id);
+        Task Delete(TEntity entity);
         void SetStateChanged(TEntity entity);
     }
 }

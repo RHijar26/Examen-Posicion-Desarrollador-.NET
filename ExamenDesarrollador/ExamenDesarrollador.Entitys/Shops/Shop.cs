@@ -13,9 +13,10 @@ namespace ExamenDesarrollador.Entitys.Shops
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string Id { get; set; }
-
+        public int Id { get; set; }
+        [MaxLength(50)]
         public string Sucursal { get; set; }
+        [MaxLength(200)]
         public string Address { get; set; }
 
     }

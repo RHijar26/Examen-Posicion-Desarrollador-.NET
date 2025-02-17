@@ -1,4 +1,5 @@
-﻿using ExamenDesarrollador.Data.Context;
+﻿using ExamenDesarrollador.Data;
+using ExamenDesarrollador.Data.Context;
 using ExamenDesarrollador.Data.Processing;
 using ExamenDesarrollador.Data.Repositorios;
 using ExamenDesarrollador.Entitys.SeedWork;
@@ -26,7 +27,7 @@ namespace ExamenDesarrollador.Server
                 // Define the BearerAuth scheme that's in use
                 c.AddSecurityDefinition("BearerAuth", new OpenApiSecurityScheme
                 {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+                    Description = "JWT Authorization header",
                     Name = "Authorization",
                     In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
@@ -116,6 +117,11 @@ namespace ExamenDesarrollador.Server
                         errorNumbersToAdd: null
                     )
             ));
+
+
+
+            DependecyInjection.AddServices(builder.Services);
+
         }
     }
 }
