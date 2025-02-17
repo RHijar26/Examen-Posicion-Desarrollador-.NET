@@ -1,5 +1,6 @@
 ﻿using ExamenDesarrollador.Bussiness.Products.GetProducts;
 using ExamenDesarrollador.Bussiness.Products.InsertProduct;
+using ExamenDesarrollador.Bussiness.Products.RemoveProduct;
 using ExamenDesarrollador.Bussiness.Products.UpdateProduct;
 using ExamenDesarrollador.Entitys.Products;
 using MediatR;
@@ -15,7 +16,7 @@ namespace ExamenDesarrollador.Server.Controllers.Products
         {
         }
 
-        [HttpPost()]
+        [HttpPost]
         public async Task<IActionResult> InsertProduct(Product product)
         {
             var result = await _mediator.Send(new InsertProductCommand(product));
@@ -38,7 +39,14 @@ namespace ExamenDesarrollador.Server.Controllers.Products
 
             return Ok(result);
         }
-            
+
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> RemoveProduct(int productId)
+        {
+            var result = await _mediator.Send(new RemoveProductCommand(productId));
+
+            return Ok(result);
+        }
     }
     
 }

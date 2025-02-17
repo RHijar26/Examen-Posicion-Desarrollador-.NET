@@ -25,10 +25,9 @@ export class ProductosComponent {
   constructor(private productService: ProductoService, private toastr: ToastrService) { }
 
   save() {
-    this.productService.guardarProducto(this.producto).subscribe({
+    this.productService.saveProduct(this.producto).subscribe({
       next: (response) => {
-        console.log('Product created successfully:', response);
-        // You might show a success message, reset form, etc.
+        this.producto = response;
 
         this.toastr.success('Producto Creado Correctamente!!');
       },
@@ -42,6 +41,27 @@ export class ProductosComponent {
 
   clean() {
     this.producto = new Producto();
+  }
+
+  remove() {
+    const result = this.productService.removeProduct(this.producto.Id).subscribe({
+      next: (response) => {
+
+        this.producto = new Producto();
+
+        this.toastr.success('Producto eliminado Correctamente');
+      },
+      error: (err) => {
+        console.error('Error creating product:', err);
+
+        this.toastr.error('Error al Eliminar el Producto.\n' + err.error.detail);
+      }
+    });;
+
+    if (result)
+    {
+     
+    }
   }
 
   onProductSelected(product: Producto) {    

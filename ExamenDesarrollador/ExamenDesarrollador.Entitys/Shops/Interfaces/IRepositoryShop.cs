@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamenDesarrollador.Entitys.Clients.Interfaces
+namespace ExamenDesarrollador.Entitys.Shops.Interfaces
 {
-    public interface IRepositoryClient : IRepositoryGeneric<Client>
+    public interface IRepositoryShop : IRepositoryGeneric<Shop>
     {
     }
 }

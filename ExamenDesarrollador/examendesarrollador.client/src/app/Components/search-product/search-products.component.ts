@@ -20,7 +20,7 @@ export class SearchProductsComponent implements OnInit {
   constructor(private productService: ProductoService,private toastr: ToastrService) { }
 
   ngOnInit() {    
-    this.productService.obtenerProductos().subscribe({
+    this.productService.getProduct().subscribe({
       next: (data) => {
 
         this.products = data;

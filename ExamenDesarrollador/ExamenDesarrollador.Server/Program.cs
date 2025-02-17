@@ -25,7 +25,6 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseCors("CorsPolicy");
 app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.

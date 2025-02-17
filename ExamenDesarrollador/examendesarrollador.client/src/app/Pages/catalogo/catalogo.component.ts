@@ -19,7 +19,7 @@ export class CatalogoComponent {
 
 
   ngOnInit() {
-    this.productService.obtenerProductos().subscribe({
+    this.productService.getProduct().subscribe({
       next: (data) => {
 
         this.products = data;                

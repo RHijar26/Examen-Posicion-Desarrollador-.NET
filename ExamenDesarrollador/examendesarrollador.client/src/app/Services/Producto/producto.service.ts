@@ -9,11 +9,11 @@ import { environment } from '../../../Enviroments/enviroments';
 })
 export class ProductoService {
 
-  private apiUrl = environment.apiUrl + 'product';
+  private apiUrl = environment.apiUrl + 'product/';
 
   constructor(private http: HttpClient) { }
 
-  guardarProducto(product: Producto): Observable<Producto> {
+  saveProduct(product: Producto): Observable<Producto> {
 
     if (product.Id != 0) {
       return this.http.put<Producto>(this.apiUrl, product);
@@ -22,8 +22,11 @@ export class ProductoService {
     }
 
   }
-
-  obtenerProductos(): Observable<Producto[]> {
+  getProduct(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
+  }
+
+  removeProduct(productId: number) {
+    return this.http.delete<boolean>(`${this.apiUrl}${productId}`);
   }
 }

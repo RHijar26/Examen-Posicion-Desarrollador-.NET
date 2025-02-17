@@ -53,15 +53,7 @@ namespace ExamenDesarrollador.Server
 
             #endregion
 
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .WithExposedHeaders("Content-Disposition")); ;
-            });
+   
 
             #region Authentication & Authorization
 
@@ -82,12 +74,22 @@ namespace ExamenDesarrollador.Server
             //    };
             //});
 
+            //builder.Services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder
+            //            .AllowAnyOrigin()
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .WithExposedHeaders("Content-Disposition")); ;
+            //});
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
                 {
                     builder.AllowAnyOrigin()
-                           .AllowAnyMethod()
+                           .AllowAnyMethod()                           
                            .AllowAnyHeader();
                 });
             });

@@ -1,7 +1,11 @@
 ﻿using ExamenDesarrollador.Data.Repositorys;
-using ExamenDesarrollador.Data.Repositorys.Clients.Products;
+using ExamenDesarrollador.Data.Repositorys.Clients;
+using ExamenDesarrollador.Data.Repositorys.Products;
+using ExamenDesarrollador.Data.Repositorys.Shops;
+using ExamenDesarrollador.Entitys.Clients.Interfaces;
 using ExamenDesarrollador.Entitys.Comuns;
 using ExamenDesarrollador.Entitys.Products.Interfaces;
+using ExamenDesarrollador.Entitys.Shops.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +22,8 @@ namespace ExamenDesarrollador.Data
         {
 
             services.AddScoped<IRepositoryProducts, RepositoryProducts>();
+            services.AddScoped<IRepositoryClient, RepositoryClient>();
+            services.AddScoped<IRepositoryShop, RepositoryShop>();
 
         }
     }

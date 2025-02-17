@@ -23,6 +23,12 @@ namespace ExamenDesarrollador.Bussiness.Products.RemoveProduct
         private readonly IRepositoryProducts repositoryProducts;
         public IUnitOfWork UnitOfWork { get; set; }
 
+        public RemoveProductCommandHandler(IRepositoryProducts repositoryProducts, IUnitOfWork unitOfWork)
+        {
+            this.repositoryProducts = repositoryProducts;
+            UnitOfWork = unitOfWork;
+        }
+
         public async Task<bool> Handle(RemoveProductCommand request, CancellationToken cancellationToken)
         {
 

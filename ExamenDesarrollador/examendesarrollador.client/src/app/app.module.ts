@@ -19,12 +19,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { SearchProductsComponent } from './Components/search-product/search-products.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { SearchClientComponent } from './Dialogs/search-client/search-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, CatalogoComponent, ProductosComponent, HeaderComponent, ClientesComponent, SucursalesComponent, DividerComponent, ImageUploaderComponent,
-    SearchProductsComponent, CarritoComponent
+    SearchProductsComponent, CarritoComponent, SearchClientComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
@@ -42,7 +44,8 @@ import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
     ]),    
   ],
   providers: [
-    provideHttpClient() 
+    provideHttpClient(),
+    provideAnimationsAsync() 
   ],
   bootstrap: [AppComponent]
 })

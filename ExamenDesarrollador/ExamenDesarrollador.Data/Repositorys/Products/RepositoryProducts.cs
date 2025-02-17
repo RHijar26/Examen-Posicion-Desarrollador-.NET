@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExamenDesarrollador.Data.Repositorys.Clients.Products
+namespace ExamenDesarrollador.Data.Repositorys.Products
 {
     public class RepositoryProducts : RepositoryGeneric<Product>, IRepositoryProducts
     {
