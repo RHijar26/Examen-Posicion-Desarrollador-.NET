@@ -47,19 +47,19 @@
 
           <div class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
             <div class="px-4 sm:px-6">
-              <h2 class="text-base font-semibold text-gray-900" id="slide-over-title">Consulta Clientes</h2>
+              <h2 class="text-base font-semibold text-gray-900" id="slide-over-title">Consulta Tienda</h2>
             </div>
             <div class="relative mt-6 flex-1 px-4 sm:px-6 ">
-              
-              <div  *ngIf="filteredClients.length > 0; else noResults">
-                <div *ngFor="let client of filteredClients" class="bg-white shadow rounded-lg p-4" (click)="clientSelected(client)">
-                  <h5>{{ client.Name }} {{ client.Surnames  }}</h5>                  
-                  <p>Dirección: {{ client.Address }}</p>
+
+              <div *ngIf="shops.length > 0; else noResults">
+                <div *ngFor="let shop of shops" class="bg-white shadow rounded-lg p-4" (click)="shopSelected(shop)">
+                  <h5>{{ shop.Sucursal }}</h5>
+                  <p>Dirección: {{ shop.Address }}</p>
                 </div>
               </div>
 
               <ng-template #noResults>
-                <p>No se han Encontrado Clientes.</p>
+                <p>No se han Encontrado Tiendas.</p>
               </ng-template>
 
             </div>

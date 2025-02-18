@@ -11,7 +11,6 @@
     <Folder Include="src\app\Components\Login\" />
     <Folder Include="src\app\Models\Clientes\" />
     <Folder Include="src\app\Models\Carrito\" />
-    <Folder Include="src\app\Dialogs\" />
     <Folder Include="src\Enviroments\" />
   </ItemGroup>
 </Project>

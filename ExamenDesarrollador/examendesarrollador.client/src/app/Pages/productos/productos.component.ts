@@ -29,7 +29,7 @@ export class ProductosComponent {
       next: (response) => {
         this.producto = response;
 
-        this.toastr.success('Producto Creado Correctamente!!');
+        this.toastr.success('Producto Guardado Correctamente!!');
       },
       error: (err) => {
         console.error('Error creating product:', err);
@@ -52,16 +52,11 @@ export class ProductosComponent {
         this.toastr.success('Producto eliminado Correctamente');
       },
       error: (err) => {
-        console.error('Error creating product:', err);
+        console.error('Error removing product:', err);
 
         this.toastr.error('Error al Eliminar el Producto.\n' + err.error.detail);
       }
-    });;
-
-    if (result)
-    {
-     
-    }
+    });;    
   }
 
   onProductSelected(product: Producto) {    

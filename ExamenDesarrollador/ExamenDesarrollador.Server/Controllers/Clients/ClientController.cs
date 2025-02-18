@@ -1,4 +1,7 @@
-﻿using ExamenDesarrollador.Bussiness.Clients.InsertClient;
+﻿using ExamenDesarrollador.Bussiness.Clients.GetClients;
+using ExamenDesarrollador.Bussiness.Clients.InsertClient;
+using ExamenDesarrollador.Bussiness.Clients.RemoveClient;
+using ExamenDesarrollador.Bussiness.Clients.UpdateClient;
 using ExamenDesarrollador.Bussiness.Products.GetProducts;
 using ExamenDesarrollador.Bussiness.Products.InsertProduct;
 using ExamenDesarrollador.Bussiness.Products.RemoveProduct;
@@ -7,6 +10,7 @@ using ExamenDesarrollador.Entitys.Clients;
 using ExamenDesarrollador.Entitys.Products;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExamenDesarrollador.Server.Controllers.Clients
@@ -21,7 +25,7 @@ namespace ExamenDesarrollador.Server.Controllers.Clients
 
 
         [HttpPost]
-        public async Task<IActionResult> InsertProduct(Client client)
+        public async Task<IActionResult> InsertClient(Client client)
         {
             var result = await _mediator.Send(new InsertClientCommand(client));
 
@@ -29,21 +33,27 @@ namespace ExamenDesarrollador.Server.Controllers.Clients
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProductss()
+        public async Task<IActionResult> GetClients()
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new GetClientsQuery());
+
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(Product product)
+        public async Task<IActionResult> UpdateClient(Client client)
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new UpdateClientCommand(client));
+
+            return Ok(result);
         }
 
-        [HttpDelete("{productId}")]
-        public async Task<IActionResult> RemoveProduct(int productId)
+        [HttpDelete("{clientId}")]
+        public async Task<IActionResult> RemoveProduct(int clientId)
         {
-            throw new NotImplementedException();
+            var result = await _mediator.Send(new RemoveClientCommand(clientId));
+
+            return Ok(result);
         }
 
 

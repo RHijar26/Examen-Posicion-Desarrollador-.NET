@@ -24,9 +24,7 @@ export class SearchProductsComponent implements OnInit {
       next: (data) => {
 
         this.products = data;
-        this.filteredProducts = this.products;
-
-        console.log('Server response:', data);
+        this.filteredProducts = this.products;        
       },
       error: (error) => {
         console.error('Error fetching products:', error);

@@ -21,12 +21,14 @@ import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SearchClientComponent } from './Dialogs/search-client/search-client.component';
+import { SearchShopComponent } from './Dialogs/search-shop/search-shop.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, CatalogoComponent, ProductosComponent, HeaderComponent, ClientesComponent, SucursalesComponent, DividerComponent, ImageUploaderComponent,
-    SearchProductsComponent, CarritoComponent, SearchClientComponent
+    SearchProductsComponent, CarritoComponent, SearchClientComponent, SearchShopComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,

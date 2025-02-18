@@ -9,5 +9,6 @@ namespace ExamenDesarrollador.Entitys.Shops.Interfaces
 {
     public interface IRepositoryShop : IRepositoryGeneric<Shop>
     {
+        Task<List<Shop>> GetShops();  
     }
 }

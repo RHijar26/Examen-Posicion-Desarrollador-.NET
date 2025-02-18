@@ -27,7 +27,7 @@ export class ClientesComponent {
       next: (response) => {
         this.Client = response;
 
-        this.toastr.success('Cliente Creado Correctamente!!');
+        this.toastr.success('Cliente Guardado Correctamente!!');
       },
       error: (err) => {
         console.error('Error creating product:', err);
@@ -37,7 +37,34 @@ export class ClientesComponent {
     });
   }
 
+  remove() {
+    const result = this.clientService.removeClient(this.Client.Id).subscribe({
+      next: (response) => {
+
+        this.Client = new Cliente();
+
+        this.toastr.success('Cliente eliminado Correctamente');
+      },
+      error: (err) => {
+        console.error('Error removing product:', err);
+
+        this.toastr.error('Error al Eliminar el cliente.\n' + err.error.detail);
+      }
+    });;    
+  }
+
   openDialog() {
-    this.dialog.open(SearchClientComponent);
+    const dialogRef = this.dialog.open(SearchClientComponent);
+  
+
+    dialogRef.afterClosed().subscribe(result => {  
+      if (result) {
+        this.Client = result;
+      }
+    });
+  }
+
+  clean() {
+    this.Client = new Cliente();
   }
 }
