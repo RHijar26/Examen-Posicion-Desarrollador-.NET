@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "ExamenDesarrollador.Server\\ExamenDesarrollador.Server.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "examendesarrollador.client\\examendesarrollador.client.esproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

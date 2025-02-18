@@ -16,9 +16,14 @@ export class CarritoService {
 
   getShoppingCart()
   {
+    const productsData = localStorage.getItem('products');
+    if (productsData)
+    {
+      this.listaProductos = JSON.parse(productsData);
+    }
+
     return this.listaProductos;
   }
-
 
   add(producto: Producto, cantidad: number = 1)
   {
@@ -31,9 +36,31 @@ export class CarritoService {
     }
     else
     {
-      this.listaProductos[productoExiste].Cantidad = cantidad;
+      this.listaProductos[productoExiste].Cantidad += cantidad;
     }
 
     this.cartSubject.next(this.listaProductos); // Emit updated cart
+
+    localStorage.setItem('products', JSON.stringify(this.listaProductos));
+  }
+
+  removeProduct(product: Producto)
+  {
+    const index = this.listaProductos.findIndex(p => p.Producto.Id == product.Id);    
+
+    if (index != -1)
+    {
+      this.listaProductos.splice(index, 1);
+      localStorage.setItem('products', JSON.stringify(this.listaProductos));
+    }
+  }
+
+  update(product: Producto, amount: number) {
+    const index = this.listaProductos.findIndex(p => p.Producto.Id == product.Id);
+
+    if (index != -1 && index < this.listaProductos.length) {
+      this.listaProductos[index].Cantidad = amount;
+      localStorage.setItem('products', JSON.stringify(this.listaProductos));
+    }
   }
 }

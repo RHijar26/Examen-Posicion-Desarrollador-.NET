@@ -1,5 +1,6 @@
 ﻿using ExamenDesarrollador.Bussiness.Clients.GetClients;
 using ExamenDesarrollador.Bussiness.Clients.InsertClient;
+using ExamenDesarrollador.Bussiness.Clients.RegisterBuy;
 using ExamenDesarrollador.Bussiness.Clients.RemoveClient;
 using ExamenDesarrollador.Bussiness.Clients.UpdateClient;
 using ExamenDesarrollador.Bussiness.Products.GetProducts;
@@ -12,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ExamenDesarrollador.Server.Controllers.Clients
 {
@@ -56,6 +58,12 @@ namespace ExamenDesarrollador.Server.Controllers.Clients
             return Ok(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> RegisterBuy(List<CartDTO> cartDTO)
+        {
+            var result = await _mediator.Send(new RegisterBuyCommand(cartDTO, ClientId));
+            return Ok(result);
+        }
 
     }
 }

@@ -35,6 +35,9 @@ export class CatalogoComponent {
   addProductShoppingCart(product: Producto)
   {
     this.carrito.add(product);
+
+    this.toastr.success('Producto Agregado al Carrito');
+    
   }
 
 }

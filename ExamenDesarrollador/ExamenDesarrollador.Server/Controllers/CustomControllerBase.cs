@@ -9,7 +9,7 @@ namespace ExamenDesarrollador.Server.Controllers
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         public IMediator _mediator { get; set; }
-        public int UsuarioId { get; set; }
+        public int ClientId { get; set; }
 
         public CustomControllerBase(IMediator mediator, IHttpContextAccessor httpContextAccessor)
         {
@@ -22,7 +22,7 @@ namespace ExamenDesarrollador.Server.Controllers
                 var token = authHeader.FirstOrDefault()!.ToString().Substring(7);
                 var identity = new ClaimsIdentity(new JwtSecurityTokenHandler().ReadJwtToken(token).Claims, "jwt");
                 var IdUsuarioAux = identity.FindFirst("Id").Value;
-                UsuarioId = Convert.ToInt32(IdUsuarioAux);
+                ClientId = Convert.ToInt32(IdUsuarioAux);
 
                 var remoteIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress;
 
