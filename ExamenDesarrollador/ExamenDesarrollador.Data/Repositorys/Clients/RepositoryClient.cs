@@ -1,6 +1,7 @@
 ﻿using ExamenDesarrollador.Data.Context;
 using ExamenDesarrollador.Entitys.Clients;
 using ExamenDesarrollador.Entitys.Clients.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,40 @@ namespace ExamenDesarrollador.Data.Repositorys.Clients
             var clients = await _context.Client.ToListAsync();
             
             return clients;
+        }
+
+        public async Task<Client> GetUser(string user, string passWord)
+        {
+            var userDB = await _context.Client.FirstOrDefaultAsync(c => c.User == user);
+
+            if (userDB == null)
+            {
+                throw new Exception("No se ha Encontrado el Usuario");
+            }
+
+            PasswordHasher<Client> passwordHasher = new PasswordHasher<Client>();
+
+            PasswordVerificationResult resultVerification = passwordHasher.VerifyHashedPassword(
+                userDB,
+                userDB.PassWord,
+                passWord
+            );
+
+            if (resultVerification == PasswordVerificationResult.Failed)
+            {
+                throw new Exception("Contraseña Incorrecta");
+            }
+            else if (resultVerification == PasswordVerificationResult.SuccessRehashNeeded)
+            {
+                PasswordHasher<Client> hasher = new PasswordHasher<Client>();
+                string newPassWord = hasher.HashPassword(userDB, userDB.PassWord);
+
+                userDB.PassWord = newPassWord;
+                await _context.SaveChangesAsync();
+            }
+
+            return userDB;
+
         }
     }
 }
