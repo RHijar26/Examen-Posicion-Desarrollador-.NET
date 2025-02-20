@@ -15,11 +15,13 @@ namespace ExamenDesarrollador.Bussiness.Identity.Login
 {
     public class LoginCommand : CommandBase<string>
     {
-        public LoginDTO LoginDTO { get; set; }
+        public string User { get ; set; }
+        public string Password { get; set; }
 
-        public LoginCommand(LoginDTO loginDTO)
+        public LoginCommand(string user, string password)
         {
-            LoginDTO = loginDTO;
+            User = user;
+            Password = password;
         }
     }
     public class LoginCommandHandler : ICommandHandler<LoginCommand, string>
@@ -28,9 +30,18 @@ namespace ExamenDesarrollador.Bussiness.Identity.Login
         private readonly IRepositoryClient repositoryClient;
         public IUnitOfWork UnitOfWork { get;set; }
 
-        public Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
-        {   
-            throw new NotImplementedException();
+        public LoginCommandHandler(IConfiguration config, IRepositoryClient repositoryClient, IUnitOfWork unitOfWork)
+        {
+            _config = config;
+            this.repositoryClient = repositoryClient;
+            UnitOfWork = unitOfWork;
+        }
+
+        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
+        {
+            var result = await repositoryClient.GetUser(request.User,request.Password);
+
+            return (GenerateJwtToken(result.User));
         }
 
         private string GenerateJwtToken(string username)

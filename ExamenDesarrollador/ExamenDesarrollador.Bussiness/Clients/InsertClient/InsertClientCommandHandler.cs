@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ExamenDesarrollador.Bussiness.Clients.InsertClient
 {
@@ -44,6 +45,12 @@ namespace ExamenDesarrollador.Bussiness.Clients.InsertClient
                 throw new Exception("La Dirección del cliente es Requerida");
             }
 
+            var existingUser = await repositoryClient.GetClientByUser(request.Client.User);
+
+            if(existingUser != null)
+            {
+                throw new Exception("El nombre de Usuario ya está Registrado");
+            }
 
             await repositoryClient.Insert(request.Client);
 

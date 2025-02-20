@@ -58,7 +58,7 @@ namespace ExamenDesarrollador.Server.Controllers.Clients
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("RegisterBuy")]
         public async Task<IActionResult> RegisterBuy(List<CartDTO> cartDTO)
         {
             var result = await _mediator.Send(new RegisterBuyCommand(cartDTO, ClientId));

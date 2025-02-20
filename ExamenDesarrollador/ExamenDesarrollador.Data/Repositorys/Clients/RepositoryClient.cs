@@ -17,6 +17,14 @@ namespace ExamenDesarrollador.Data.Repositorys.Clients
         {
         }
 
+        public async Task<Client> GetClientByUser(string user)
+        {
+            var client = await _context.Client.FirstOrDefaultAsync(c => c.User == user);
+
+
+            return client;
+        }
+
         public async Task<List<Client>> GetClients()
         {
             var clients = await _context.Client.ToListAsync();
@@ -41,17 +49,17 @@ namespace ExamenDesarrollador.Data.Repositorys.Clients
                 passWord
             );
 
-            if (resultVerification == PasswordVerificationResult.Failed)
-            {
-                throw new Exception("Contraseña Incorrecta");
-            }
-            else if (resultVerification == PasswordVerificationResult.SuccessRehashNeeded)
+            
+            if (resultVerification == PasswordVerificationResult.SuccessRehashNeeded || userDB.PassWord == passWord)
             {
                 PasswordHasher<Client> hasher = new PasswordHasher<Client>();
                 string newPassWord = hasher.HashPassword(userDB, userDB.PassWord);
 
                 userDB.PassWord = newPassWord;
                 await _context.SaveChangesAsync();
+            }else if (resultVerification == PasswordVerificationResult.Failed)
+            {
+                throw new Exception("Contraseña Incorrecta");
             }
 
             return userDB;

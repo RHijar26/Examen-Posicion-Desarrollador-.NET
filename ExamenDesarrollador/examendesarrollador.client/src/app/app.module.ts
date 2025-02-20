@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './Components/login/login.component';
+import { LoginComponent } from './Pages/login/login.component';
 import { provideRouter, RouterModule } from '@angular/router';
 import { ProductosComponent } from './Pages/productos/productos.component';
 import { HeaderComponent } from './Layout/header/header.component';
@@ -22,13 +22,15 @@ import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { SearchClientComponent } from './Dialogs/search-client/search-client.component';
 import { SearchShopComponent } from './Dialogs/search-shop/search-shop.component';
+import { AuthGuard } from './Services/Authentication/auth.guard';
+import { RegisterComponent } from './Pages/register/register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,    
     LoginComponent, CatalogoComponent, ProductosComponent, HeaderComponent, ClientesComponent, SucursalesComponent, DividerComponent, ImageUploaderComponent,
-    SearchProductsComponent, CarritoComponent, SearchClientComponent, SearchShopComponent
+    SearchProductsComponent, CarritoComponent, SearchClientComponent, SearchShopComponent, RegisterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule,
@@ -36,12 +38,13 @@ import { SearchShopComponent } from './Dialogs/search-shop/search-shop.component
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
+      { path: 'catalogo', component: CatalogoComponent, canActivate: [AuthGuard] },
+      { path: 'Productos', component: ProductosComponent, canActivate: [AuthGuard] },
+      { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
+      { path: 'sucursales', component: SucursalesComponent, canActivate: [AuthGuard] },
+      { path: 'Carrito', component: CarritoComponent, canActivate: [AuthGuard] },      
       { path: 'login', component: LoginComponent },
-      { path: 'catalogo', component: CatalogoComponent },
-      { path: 'Productos', component: ProductosComponent },
-      { path: 'Clientes', component: ClientesComponent },
-      { path: 'Sucursales', component: SucursalesComponent },
-      { path: 'Carrito', component: CarritoComponent },
+      { path: 'registro', component: RegisterComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'catalogo' }
     ]),    
   ],

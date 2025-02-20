@@ -1,6 +1,8 @@
-﻿using MediatR;
+﻿using ExamenDesarrollador.Bussiness.Identity.Login;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security;
 
 namespace ExamenDesarrollador.Server.Controllers.Identity
 {
@@ -13,15 +15,12 @@ namespace ExamenDesarrollador.Server.Controllers.Identity
         }
 
 
-        [HttpPost("Login")]
-        public IActionResult Login([FromBody] LoginModel model)
+        [HttpPost]
+        public async Task<IActionResult> Login(string user, string passWord)
         {
-            if (model.Username == "admin" && model.Password == "password")
-            {
-                var token = GenerateJwtToken(model.Username);
-                return Ok(new { token });
-            }
-            return Unauthorized();
+            var result = await _mediator.Send(new LoginCommand(user,passWord));
+
+            return Ok(new { result });
         }
     }
 }

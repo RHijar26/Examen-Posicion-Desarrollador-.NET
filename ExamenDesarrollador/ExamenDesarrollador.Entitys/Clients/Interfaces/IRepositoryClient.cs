@@ -10,6 +10,7 @@ namespace ExamenDesarrollador.Entitys.Clients.Interfaces
     public interface IRepositoryClient : IRepositoryGeneric<Client>
     {
         Task<List<Client>> GetClients();
+        Task<Client> GetClientByUser(string user);
         Task<Client> GetUser(string user, string passWord);
     }
 }

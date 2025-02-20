@@ -3,4 +3,6 @@ export class Cliente {
   Name!: string;
   Surnames!: string;
   Address!: string;
+  User!: string;
+  PassWord!: string;
 }

@@ -16,7 +16,9 @@ export class ClientesComponent {
     Id: 0,
     Name: '',
     Surnames: '',
-    Address: ''
+    Address: '',
+    User: '',
+    PassWord: '',
   };
     
 
