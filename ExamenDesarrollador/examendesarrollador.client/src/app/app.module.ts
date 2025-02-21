@@ -16,7 +16,7 @@ import { ImageUploaderComponent } from './Components/image-uploader/image-upload
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SearchProductsComponent } from './Components/search-product/search-products.component';
+import { SearchProductsComponent } from './Dialogs/search-product/search-products.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { CatalogoComponent } from './Pages/catalogo/catalogo.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -39,10 +39,10 @@ import { RegisterComponent } from './Pages/register/register.component';
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'catalogo', component: CatalogoComponent, canActivate: [AuthGuard] },
-      { path: 'Productos', component: ProductosComponent, canActivate: [AuthGuard] },
+      { path: 'productos', component: ProductosComponent, canActivate: [AuthGuard] },
       { path: 'clientes', component: ClientesComponent, canActivate: [AuthGuard] },
       { path: 'sucursales', component: SucursalesComponent, canActivate: [AuthGuard] },
-      { path: 'Carrito', component: CarritoComponent, canActivate: [AuthGuard] },      
+      { path: 'carrito', component: CarritoComponent, canActivate: [AuthGuard] },      
       { path: 'login', component: LoginComponent },
       { path: 'registro', component: RegisterComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'catalogo' }

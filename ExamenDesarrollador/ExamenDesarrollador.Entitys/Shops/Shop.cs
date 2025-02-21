@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExamenDesarrollador.Entitys.Products;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,6 +19,9 @@ namespace ExamenDesarrollador.Entitys.Shops
         public string Sucursal { get; set; }
         [MaxLength(200)]
         public string Address { get; set; }
+
+
+        public ICollection<ProductShop> ProductShop { get; set; }
 
     }
 }

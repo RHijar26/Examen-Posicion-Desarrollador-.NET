@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit,Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit,Output } from '@angular/core';
 import { ProductoService } from '../../Services/Producto/producto.service';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from '../../Models/Productos/Producto';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 // Example product interface
 
@@ -14,16 +15,27 @@ import { Producto } from '../../Models/Productos/Producto';
 export class SearchProductsComponent implements OnInit {
   searchTerm: string = '';
   products: Producto[] = []
-  filteredProducts: Producto[] = [];
-
-  @Output() productSelected = new EventEmitter<Producto>(); // EventEmitter to send data
-  constructor(private productService: ProductoService,private toastr: ToastrService) { }
+  filteredProducts: Producto[] = [];  
+  constructor(
+    private productService: ProductoService,
+    private toastr: ToastrService,
+    private dialogRef: MatDialogRef<SearchProductsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { selectedProducts: Producto[] }
+  ) { }
 
   ngOnInit() {    
     this.productService.getProduct().subscribe({
       next: (data) => {
 
-        this.products = data;
+        if (this.data.selectedProducts.length > 0)
+        {
+          this.products = data.filter(product =>
+            !this.data.selectedProducts.some(selected => selected.Id === product.Id)
+          );
+        } else {
+          this.products = data;
+        }
+          
         this.filteredProducts = this.products;        
       },
       error: (error) => {
@@ -35,8 +47,8 @@ export class SearchProductsComponent implements OnInit {
 
   }
 
-  selectProduct(product: Producto) {
-    this.productSelected.emit(product);     
+  selectProduct(product: Producto) {    
+    this.dialogRef.close(product);
   }
 
   searchProducts() {
@@ -50,5 +62,9 @@ export class SearchProductsComponent implements OnInit {
         product.Name.toLowerCase().includes(term)
       );
     }
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

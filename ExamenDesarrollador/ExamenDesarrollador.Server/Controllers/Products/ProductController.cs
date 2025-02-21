@@ -1,4 +1,5 @@
 ﻿using ExamenDesarrollador.Bussiness.Products.GetProducts;
+using ExamenDesarrollador.Bussiness.Products.GetProductsFromShop;
 using ExamenDesarrollador.Bussiness.Products.InsertProduct;
 using ExamenDesarrollador.Bussiness.Products.RemoveProduct;
 using ExamenDesarrollador.Bussiness.Products.UpdateProduct;
@@ -44,6 +45,14 @@ namespace ExamenDesarrollador.Server.Controllers.Products
         public async Task<IActionResult> RemoveProduct(int productId)
         {
             var result = await _mediator.Send(new RemoveProductCommand(productId));
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetProductsFromShop")]
+        public async Task<IActionResult> GetProductsFromShop(int sucursal)
+        {
+            var result = await _mediator.Send(new GetProductFromShopQuery(sucursal));
 
             return Ok(result);
         }

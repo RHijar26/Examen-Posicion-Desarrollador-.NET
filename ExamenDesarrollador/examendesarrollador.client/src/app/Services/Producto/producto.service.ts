@@ -22,6 +22,11 @@ export class ProductoService {
     }
 
   }
+
+  getProductsFromShop(sucursal: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}GetProductsFromShop?sucursal=${sucursal}`);
+  }
+
   getProduct(): Observable<Producto[]> {
     return this.http.get<Producto[]>(this.apiUrl);
   }

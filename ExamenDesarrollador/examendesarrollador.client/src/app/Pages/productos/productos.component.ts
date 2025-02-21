@@ -3,6 +3,9 @@ import { Producto } from '../../Models/Productos/Producto';
 import { ProductoService } from '../../Services/Producto/producto.service';
 
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SearchShopComponent } from '../../Dialogs/search-shop/search-shop.component';
+import { SearchProductsComponent } from '../../Dialogs/search-product/search-products.component';
 
 @Component({
   selector: 'app-productos',
@@ -22,7 +25,7 @@ export class ProductosComponent {
       Image: ''
   };
 
-  constructor(private productService: ProductoService, private toastr: ToastrService) { }
+  constructor(private productService: ProductoService, private toastr: ToastrService, private dialog: MatDialog) { }
 
   save() {
     this.productService.saveProduct(this.producto).subscribe({
@@ -57,6 +60,16 @@ export class ProductosComponent {
         this.toastr.error('Error al Eliminar el Producto.\n' + err.error.detail);
       }
     });;    
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(SearchProductsComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.producto = result;
+      }
+    });
   }
 
   onProductSelected(product: Producto) {    

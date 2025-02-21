@@ -1,37 +1,72 @@
 <form>
-  <div class="space-y-12">
-    <div class="border-b border-gray-900/10 pb-12">
-      <h3 class="text-base/7 font-semibold text-gray-900">Información Tienda</h3>
-      <app-divider></app-divider>
+    <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12">
+            <h3 class="text-base/7 font-semibold text-gray-900">Información Tienda</h3>
+            <app-divider></app-divider>
 
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-6">
-          <label for="first-name" class="block text-sm/6 font-medium text-gray-900">Sucursal:</label>
-          <div class="mt-2">
-            <input type="text" name="sucursal" id="sucursal" placeholder="Nombre Sucursal" [(ngModel)]="Shop.Sucursal"
-                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-          </div>
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                <div class="sm:col-span-6">
+                    <label for="first-name" class="block text-sm/6 font-medium text-gray-900">Sucursal:</label>
+                    <div class="mt-2">
+                        <input type="text" name="sucursal" id="sucursal" placeholder="Nombre Sucursal" [(ngModel)]="Shop.Sucursal"
+                               class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    </div>
+                </div>
+
+                <div class="sm:col-span-6">
+                    <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Dirección:</label>
+                    <div class="mt-2">
+                        <input id="address" name="address" [(ngModel)]="Shop.Address" placeholder="Dirección Tienda" value=""
+                               class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    </div>
+                </div>
+
+            </div>
         </div>
 
-        <div class="sm:col-span-6">
-          <label for="last-name" class="block text-sm/6 font-medium text-gray-900">Dirección:</label>
-          <div class="mt-2">
-            <input id="address" name="address" [(ngModel)]="Shop.Address" placeholder="Dirección Tienda" value=""
-                   class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
-          </div>
-        </div>    
-
-      </div>
     </div>
 
-  </div>
+    <br />
 
-  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button type="submit" class="rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2
+            focus-visible:outline-indigo-600" (click)="openProductDialog()">
+        Agregar Producto
+    </button>
+    <br />
+    <br />
 
-    <button *ngIf="Shop.Id > 0" type="button" class="text-sm/6 bg-danger-600 font-semibold text-gray-900" (click)="remove()">Eliminar</button>
+    <table class="w-full border border-gray-300">
+        <thead>
+            <tr class="">
+                <th class="border border-gray-300 px-4 py-2">#</th>
+                <th class="border border-gray-300 px-4 py-2">Producto</th>
+                <th class="border border-gray-300 px-4 py-2"></th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200" *ngFor="let product of products; let i = index">
+            <tr class="bg-white hover:bg-gray-100">
 
-    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="clean()">Limpiar</button>
-    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="openDialog()">Consultar</button>
-    <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="save()">Guardar</button>
-  </div>
+                <td class="px-4 py-2">{{ i + 1 }}</td>
+                <td class="px-4 py-2">{{product.Name}}</td>
+                <td class="px-4 py-2">
+                    <button (click)="removeProduct(product)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <div class="mt-6 flex items-center justify-end gap-x-6">
+
+        <button *ngIf="Shop.Id > 0" type="button" class="text-sm/6 bg-danger-600 font-semibold text-gray-900" (click)="remove()">Eliminar</button>
+
+        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="clean()">Limpiar</button>
+        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="openDialog()">Consultar</button>
+        <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="save()">Guardar</button>
+    </div>
 </form>

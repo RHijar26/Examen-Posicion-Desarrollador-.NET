@@ -18,7 +18,8 @@ namespace ExamenDesarrollador.Data.Repositorys.Shops
 
         public async Task<List<Shop>> GetShops()
         {
-            var shops = await _context.Shop.ToListAsync();
+            var shops = await _context.Shop                
+                .ToListAsync();
 
             return shops;                         
         }

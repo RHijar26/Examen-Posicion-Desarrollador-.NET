@@ -25,6 +25,7 @@ namespace ExamenDesarrollador.Data
             services.AddScoped<IRepositoryClient, RepositoryClient>();
             services.AddScoped<IRepositoryShop, RepositoryShop>();
             services.AddScoped<IRepositoryClientBuy, RepositoryClientBuy>();
+            services.AddScoped<IRepositoryProductShop, RepositoryProductShop>();
 
         }
     }

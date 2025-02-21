@@ -6,6 +6,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { SearchClientComponent } from '../../Dialogs/search-client/search-client.component';
 import { Cliente } from '../../Models/Clientes/Cliente';
 import { SearchShopComponent } from '../../Dialogs/search-shop/search-shop.component';
+import { ProductoService } from '../../Services/Producto/producto.service';
+import { Producto } from '../../Models/Productos/Producto';
+import { SearchProductsComponent } from '../../Dialogs/search-product/search-products.component';
+import { ProductoTienda } from '../../Models/Productos/ProductoTienda';
 
 @Component({
   selector: 'app-sucursales',
@@ -18,12 +22,26 @@ export class SucursalesComponent {
     Id: 0,
     Sucursal: '',
     Address: '',
+    ProductShop: [],
   }
 
+  products: Producto[] = [];
 
-  constructor(private shopService: TiendaService, private toastr: ToastrService, private dialog: MatDialog) { }
+
+  constructor(private shopService: TiendaService, private productService: ProductoService, private toastr: ToastrService, private dialog: MatDialog) { } 
+
 
   save() {
+
+    this.products.forEach(product => {
+      const productShop = new ProductoTienda();
+
+      productShop.ProductId = product.Id;
+      productShop.ShopId = this.Shop.Id;
+
+
+    });
+
     this.shopService.saveShop(this.Shop).subscribe({
       next: (response) => {
         this.Shop = response;
@@ -61,12 +79,46 @@ export class SucursalesComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.Shop = result;
+
+        this.productService.getProductsFromShop(this.Shop.Id).subscribe({
+          next: (response) => {
+
+            this.products = response;
+          },
+          error: (err) => {
+          }
+        })
+
+
       }
     });
   }
 
+  openProductDialog() {
+    const dialogRef = this.dialog.open(SearchProductsComponent, {
+      data: { selectedProducts: this.products }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+
+        this.products.push(result);
+      }
+
+    });
+   
+  }
+
+  removeProduct(product: Producto) {
+    const index = this.products.findIndex(p => p.Id == product.Id);
+
+    if (index != -1) {
+      this.products.splice(index, 1);       
+    }
+  }
+
   clean() {
     this.Shop = new Tienda();
+    this.products = [];
   }
 
 }
