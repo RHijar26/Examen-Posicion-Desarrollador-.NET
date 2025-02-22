@@ -52,21 +52,6 @@
 
 </div>
 
-
-<!-- <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="searchModalLabel">Consulta Productos</h1>
-        <button id="closeModalBtn" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <app-search-products (productSelected)="onProductSelected($event)"></app-search-products>
-      </div>
-    </div>
-  </div>
-</div> -->
-
 <div class="mt-6 flex items-center justify-end gap-x-6">
   <button *ngIf="producto.Id > 0" type="button" class="text-sm/6 bg-danger-600 font-semibold text-gray-900" (click)="remove()">Eliminar</button>
   <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" (click)="clean()">Limpiar</button>

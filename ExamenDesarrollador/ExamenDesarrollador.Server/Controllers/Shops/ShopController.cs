@@ -2,6 +2,7 @@
 using ExamenDesarrollador.Bussiness.Clients.InsertClient;
 using ExamenDesarrollador.Bussiness.Clients.RemoveClient;
 using ExamenDesarrollador.Bussiness.Clients.UpdateClient;
+using ExamenDesarrollador.Bussiness.Shops;
 using ExamenDesarrollador.Bussiness.Shops.GetShops;
 using ExamenDesarrollador.Bussiness.Shops.InsertShop;
 using ExamenDesarrollador.Bussiness.Shops.RemoveShop;
@@ -24,7 +25,7 @@ namespace ExamenDesarrollador.Server.Controllers.Shops
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertShop(Shop shop)
+        public async Task<IActionResult> InsertShop(ShopDTO shop)
         {
             var result = await _mediator.Send(new InsertShopCommand(shop));
 
@@ -40,7 +41,7 @@ namespace ExamenDesarrollador.Server.Controllers.Shops
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateShop(Shop shop)
+        public async Task<IActionResult> UpdateShop(ShopDTO shop)
         {
             var result = await _mediator.Send(new UpdateShopCommand(shop));
 

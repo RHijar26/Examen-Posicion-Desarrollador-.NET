@@ -33,12 +33,15 @@ export class SucursalesComponent {
 
   save() {
 
+    this.Shop.ProductShop = [];
+
     this.products.forEach(product => {
       const productShop = new ProductoTienda();
 
       productShop.ProductId = product.Id;
       productShop.ShopId = this.Shop.Id;
 
+      this.Shop.ProductShop.push(productShop);
 
     });
 

@@ -10,6 +10,7 @@ using ExamenDesarrollador.Bussiness.Products.UpdateProduct;
 using ExamenDesarrollador.Entitys.Clients;
 using ExamenDesarrollador.Entitys.Products;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,7 @@ namespace ExamenDesarrollador.Server.Controllers.Clients
         }
 
         [HttpPost("RegisterBuy")]
+        [Authorize]
         public async Task<IActionResult> RegisterBuy(List<CartDTO> cartDTO)
         {
             var result = await _mediator.Send(new RegisterBuyCommand(cartDTO, ClientId));

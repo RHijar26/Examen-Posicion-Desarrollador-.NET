@@ -27,7 +27,7 @@ export class CarritoService {
 
   add(producto: Producto, cantidad: number = 1)
   {
-    const productoExiste = this.listaProductos.findIndex(item => producto.Id == item.Producto.Id);
+    const productoExiste = this.listaProductos.findIndex(item => producto.Id == item.Product.Id);
 
     if (productoExiste == -1) {
 
@@ -46,7 +46,7 @@ export class CarritoService {
 
   removeProduct(product: Producto)
   {
-    const index = this.listaProductos.findIndex(p => p.Producto.Id == product.Id);    
+    const index = this.listaProductos.findIndex(p => p.Product.Id == product.Id);    
 
     if (index != -1)
     {
@@ -55,8 +55,13 @@ export class CarritoService {
     }
   }
 
+  cleanList() {
+    localStorage.setItem('products', '');
+    this.listaProductos = [];
+  }
+
   update(product: Producto, amount: number) {
-    const index = this.listaProductos.findIndex(p => p.Producto.Id == product.Id);
+    const index = this.listaProductos.findIndex(p => p.Product.Id == product.Id);
 
     if (index != -1 && index < this.listaProductos.length) {
       this.listaProductos[index].Cantidad = amount;

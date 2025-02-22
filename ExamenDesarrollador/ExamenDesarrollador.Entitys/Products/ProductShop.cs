@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ExamenDesarrollador.Entitys.Products
@@ -29,6 +30,7 @@ namespace ExamenDesarrollador.Entitys.Products
         [ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }
         [ForeignKey(nameof(ShopId))]
+        [JsonIgnore]
         public Shop Shop { get; set; }
 
         #endregion

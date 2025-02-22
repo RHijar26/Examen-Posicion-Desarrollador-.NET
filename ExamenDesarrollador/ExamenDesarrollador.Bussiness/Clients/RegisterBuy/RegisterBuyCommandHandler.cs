@@ -47,6 +47,11 @@ namespace ExamenDesarrollador.Bussiness.Clients.RegisterBuy
                     throw new Exception($"No hay Stock suficiente de {product.Name}");
                 }
 
+                if(product.Price == 0)
+                {
+                    throw new Exception("No se Pueden Comprar Productos con Precio 0");
+                }
+
                 var clientBuy = new ClientBuy
                 {
                     ClientId = request.ClientId,
@@ -55,7 +60,10 @@ namespace ExamenDesarrollador.Bussiness.Clients.RegisterBuy
                     Date = DateTime.Now,
                 };
 
+                product.Stock -= item.Cantidad;
+
                 await repositoryClientBuy.Insert(clientBuy);
+                await repositoryProducts.Update(product, product.Id);
             }
 
 

@@ -1,4 +1,5 @@
 ﻿using ExamenDesarrollador.Entitys.Comuns;
+using ExamenDesarrollador.Entitys.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace ExamenDesarrollador.Entitys.Shops.Interfaces
 {
     public interface IRepositoryShop : IRepositoryGeneric<Shop>
     {
-        Task<List<Shop>> GetShops();  
+        Task<List<Shop>> GetShops();
+        Task UpdateProductFromShop(List<ProductShop> productShop,int shopId);
     }
 }

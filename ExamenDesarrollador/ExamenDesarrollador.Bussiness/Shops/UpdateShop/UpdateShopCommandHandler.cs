@@ -1,4 +1,5 @@
-﻿using ExamenDesarrollador.Bussiness.Configuration.Commands;
+﻿using AutoMapper;
+using ExamenDesarrollador.Bussiness.Configuration.Commands;
 using ExamenDesarrollador.Entitys.Clients.Interfaces;
 using ExamenDesarrollador.Entitys.SeedWork;
 using ExamenDesarrollador.Entitys.Shops;
@@ -13,49 +14,52 @@ namespace ExamenDesarrollador.Bussiness.Shops.UpdateShop
 {
     public class UpdateShopCommand : CommandBase<Shop>
     {
-        public Shop Shop { get; set; }
+        public ShopDTO ShopDTO { get; set; }
 
-        public UpdateShopCommand(Shop shop)
+        public UpdateShopCommand(ShopDTO shop)
         {
-            Shop = shop;
+            ShopDTO = shop;
         }
     }
     public class UpdateShopCommandHandler : ICommandHandler<UpdateShopCommand, Shop>
     {
         private readonly IRepositoryShop repositoryShop;
+        private readonly IMapper mapper;
         public IUnitOfWork UnitOfWork {  get; set; }
-
-        public UpdateShopCommandHandler(IRepositoryShop repositoryShop, IUnitOfWork unitOfWork)
+        public UpdateShopCommandHandler(IRepositoryShop repositoryShop, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this.repositoryShop = repositoryShop;
+            this.mapper = mapper;
             UnitOfWork = unitOfWork;
         }
 
         public async Task<Shop> Handle(UpdateShopCommand request, CancellationToken cancellationToken)
         {
-            if (request.Shop.Id == 0)
+            var shop = mapper.Map<Shop>(request.ShopDTO);
+
+            if (shop.Id == 0)
             {
                 throw new Exception("El ID del Cliente no Puede ser 0");
             }
 
-            if (string.IsNullOrEmpty(request.Shop.Sucursal))
+            if (string.IsNullOrEmpty(shop.Sucursal))
             {
                 throw new Exception("El Nombre de la Tienda es Requerido");
             }
 
-            if (string.IsNullOrEmpty(request.Shop.Address))
+            if (string.IsNullOrEmpty(shop.Address))
             {
                 throw new Exception("La Dirección de la Tienda es Requerida");
-            }
+            }            
 
-            var shopBD = await repositoryShop.GetById(request.Shop.Id);
-            shopBD = request.Shop;
+            await repositoryShop.Update(shop, shop.Id);
 
-            await repositoryShop.Update(shopBD, shopBD.Id);
+
+            await repositoryShop.UpdateProductFromShop(shop.ProductShop.ToList(), shop.Id);
 
             await UnitOfWork.CommitAsync();
 
-            return shopBD;
+            return shop;
         }
     }
 }

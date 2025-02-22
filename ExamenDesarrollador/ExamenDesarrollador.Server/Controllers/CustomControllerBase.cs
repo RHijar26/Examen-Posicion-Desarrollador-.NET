@@ -24,9 +24,7 @@ namespace ExamenDesarrollador.Server.Controllers
                 var IdUsuarioAux = identity.FindFirst("Id").Value;
                 ClientId = Convert.ToInt32(IdUsuarioAux);
 
-                var remoteIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress;
-
-                var asd = "";
+                var remoteIpAddress = httpContextAccessor.HttpContext.Connection.RemoteIpAddress;                
             }
 
         }

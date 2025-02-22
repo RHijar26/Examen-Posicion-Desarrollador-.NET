@@ -1,4 +1,5 @@
 ﻿using ExamenDesarrollador.Bussiness.Configuration.Commands;
+using ExamenDesarrollador.Entitys.Clients;
 using ExamenDesarrollador.Entitys.Clients.Interfaces;
 using ExamenDesarrollador.Entitys.SeedWork;
 using Microsoft.Extensions.Configuration;
@@ -41,19 +42,20 @@ namespace ExamenDesarrollador.Bussiness.Identity.Login
         {
             var result = await repositoryClient.GetUser(request.User,request.Password);
 
-            return (GenerateJwtToken(result.User));
+            return (GenerateJwtToken(result));
         }
 
-        private string GenerateJwtToken(string username)
+        private string GenerateJwtToken(Client client)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var claims = new[] { new Claim(ClaimTypes.Name, username) };
+            List<Claim> lstClaims = new List<Claim>();
+            lstClaims.Add(new Claim("Id", client.Id.ToString()));
 
             var token = new JwtSecurityToken(
                 _config["Jwt:Issuer"],
                 _config["Jwt:Audience"],
-                claims,
+                lstClaims,
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );

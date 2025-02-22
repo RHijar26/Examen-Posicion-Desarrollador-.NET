@@ -16,6 +16,10 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router, private toastr: ToastrService) { }
 
+  ngOnInit() {
+    this.authService.logout();
+  }
+
   login() {
     this.authService.login(this.username, this.password).subscribe({
       next: (response) => {

@@ -27,7 +27,7 @@ export class SearchProductsComponent implements OnInit {
     this.productService.getProduct().subscribe({
       next: (data) => {
 
-        if (this.data.selectedProducts.length > 0)
+        if (this.data != null)
         {
           this.products = data.filter(product =>
             !this.data.selectedProducts.some(selected => selected.Id === product.Id)
