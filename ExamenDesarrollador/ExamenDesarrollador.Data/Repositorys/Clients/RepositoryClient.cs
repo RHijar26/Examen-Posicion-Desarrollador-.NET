@@ -32,6 +32,14 @@ namespace ExamenDesarrollador.Data.Repositorys.Clients
             return clients;
         }
 
+        public Task<string> GetHashedPassword(Client client)
+        {
+            PasswordHasher<Client> hasher = new PasswordHasher<Client>();
+            string newPassWord = hasher.HashPassword(client, client.PassWord);
+
+            return Task.FromResult(newPassWord);
+        }
+
         public async Task<Client> GetUser(string user, string passWord)
         {
             var userDB = await _context.Client.FirstOrDefaultAsync(c => c.User == user);
@@ -48,12 +56,11 @@ namespace ExamenDesarrollador.Data.Repositorys.Clients
                 userDB.PassWord,
                 passWord
             );
-
+             
             
             if (resultVerification == PasswordVerificationResult.SuccessRehashNeeded || userDB.PassWord == passWord)
             {
-                PasswordHasher<Client> hasher = new PasswordHasher<Client>();
-                string newPassWord = hasher.HashPassword(userDB, userDB.PassWord);
+                var newPassWord = await GetHashedPassword(userDB);
 
                 userDB.PassWord = newPassWord;
                 await _context.SaveChangesAsync();

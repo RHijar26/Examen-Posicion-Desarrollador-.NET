@@ -52,6 +52,8 @@ namespace ExamenDesarrollador.Bussiness.Clients.InsertClient
                 throw new Exception("El nombre de Usuario ya está Registrado");
             }
 
+            request.Client.PassWord = await repositoryClient.GetHashedPassword(request.Client);
+
             await repositoryClient.Insert(request.Client);
 
             await UnitOfWork.CommitAsync();

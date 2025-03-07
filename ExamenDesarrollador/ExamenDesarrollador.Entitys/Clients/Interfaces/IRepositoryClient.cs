@@ -12,5 +12,6 @@ namespace ExamenDesarrollador.Entitys.Clients.Interfaces
         Task<List<Client>> GetClients();
         Task<Client> GetClientByUser(string user);
         Task<Client> GetUser(string user, string passWord);
+        Task<string> GetHashedPassword(Client client);
     }
 }
